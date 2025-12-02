@@ -55,7 +55,7 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_completed_view',
     category: 'role',
     title: 'Chief Operating Officer Completed View',
-    description: 'Chief Operating Officer (COO) watched "Lodeguard Incident Prevention Suite: 2025 Overview" to completion for the first time.',
+    description: 'Chief Operating Officer (COO) watched a piece of content to completion for the first time.',
     timestamp: new Date('2025-11-24T13:30:00'),
     metadata: {
       roleTitle: 'Chief Operating Officer',
@@ -114,7 +114,7 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_completed_view',
     category: 'role',
     title: 'VP of Mining Operations Completed View',
-    description: 'Vice President of Mining Operations watched "Worksite Wearables: Enhancing Worker Awareness and Compliance" to completion.',
+    description: 'Vice President of Mining Operations watched a piece of content to completion.',
     timestamp: new Date('2025-11-19T16:10:00'),
     metadata: {
       roleTitle: 'VP of Mining Operations',
@@ -137,7 +137,7 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_first_impression',
     category: 'role',
     title: 'Senior Safety Advisor: First Impression',
-    description: 'Senior Safety Advisor served their first impression from "Modernising Safety Culture in High-Risk Environments".',
+    description: 'Senior Safety Advisor served their first impression from a piece of content.',
     timestamp: new Date('2025-11-17T13:15:00'),
     metadata: {
       roleTitle: 'Senior Safety Advisor',
@@ -160,7 +160,7 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_completed_view',
     category: 'role',
     title: 'Mine Operations Superintendent Completed View',
-    description: 'Mine Operations Superintendent watched "Reducing Downtime Through Automated Safety Interventions" to completion.',
+    description: 'Mine Operations Superintendent watched a piece of content to completion.',
     timestamp: new Date('2025-11-15T14:50:00'),
     metadata: {
       roleTitle: 'Mine Operations Superintendent',
