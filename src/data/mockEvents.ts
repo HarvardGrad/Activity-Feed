@@ -1,0 +1,169 @@
+import type { ActivityEvent } from '../types/activity';
+
+export const mockEvents: ActivityEvent[] = [
+  {
+    id: '1',
+    type: 'role_repeat_engagement',
+    category: 'role',
+    title: 'Director of HSE: Repeat Engagement',
+    description: 'Director of Health, Safety & Environment has viewed content 7+ times, showing strong interest in your safety solutions.',
+    timestamp: new Date('2025-11-26T14:30:00'), // Today
+    metadata: {
+      roleTitle: 'Director of HSE',
+      engagementCount: 7,
+    },
+  },
+  {
+    id: '2',
+    type: 'milestone_impressions',
+    category: 'content',
+    title: 'Content Milestone: 5,000 Impressions',
+    description: '"How IronPeak Can Reduce LTI Rates with Real-Time Hazard Detection" has reached 5,000 impressions across the account.',
+    timestamp: new Date('2025-11-26T10:15:00'),
+    metadata: {
+      contentTitle: 'How IronPeak Can Reduce LTI Rates',
+      milestone: 5000,
+    },
+  },
+  {
+    id: '3',
+    type: 'campaign_added_tactical',
+    category: 'campaign',
+    title: 'Added to Tactical Campaign',
+    description: 'IronPeak Minerals Group added to "Mining Safety Innovation - Q1 2025" campaign.',
+    timestamp: new Date('2025-11-25T16:45:00'),
+    metadata: {
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
+      status: 'active',
+    },
+  },
+  {
+    id: '4',
+    type: 'milestone_video_views',
+    category: 'content',
+    title: 'Video Milestone: 250 Completed Views',
+    description: '"Case Study: 37% Reduction in Incidents at Ridgecrest Mine" has reached 250 completed views.',
+    timestamp: new Date('2025-11-25T09:20:00'),
+    metadata: {
+      contentTitle: 'Case Study: 37% Reduction in Incidents',
+      milestone: 250,
+    },
+  },
+  {
+    id: '5',
+    type: 'role_completed_view',
+    category: 'role',
+    title: 'Chief Operating Officer Completed View',
+    description: 'Chief Operating Officer (COO) watched "Lodeguard Incident Prevention Suite: 2025 Overview" to completion for the first time.',
+    timestamp: new Date('2025-11-24T13:30:00'),
+    metadata: {
+      roleTitle: 'Chief Operating Officer',
+    },
+  },
+  {
+    id: '6',
+    type: 'milestone_watch_time',
+    category: 'content',
+    title: 'Watch Time Milestone: 8 Hours',
+    description: 'Cumulative watch time for "Advanced Hazard Forecasting: A Technical Deep Dive" has reached 8 hours.',
+    timestamp: new Date('2025-11-23T11:00:00'),
+    metadata: {
+      contentTitle: 'Advanced Hazard Forecasting',
+      milestone: 8,
+    },
+  },
+  {
+    id: '7',
+    type: 'role_first_impression',
+    category: 'role',
+    title: 'New Key Role: First Impression',
+    description: 'HSE Manager served their first impression from your campaign.',
+    timestamp: new Date('2025-11-22T15:45:00'),
+    metadata: {
+      roleTitle: 'HSE Manager',
+    },
+  },
+  {
+    id: '8',
+    type: 'milestone_impressions',
+    category: 'content',
+    title: 'Content Milestone: 1,000 Impressions',
+    description: '"The Hidden Costs of Near-Misses in Mining Operations" has reached 1,000 impressions.',
+    timestamp: new Date('2025-11-21T14:20:00'),
+    metadata: {
+      contentTitle: 'The Hidden Costs of Near-Misses',
+      milestone: 1000,
+    },
+  },
+  {
+    id: '9',
+    type: 'campaign_added_always_on',
+    category: 'campaign',
+    title: 'Added to Always On Campaign',
+    description: 'IronPeak Minerals Group added to "Mining Safety Leaders Program" always-on campaign.',
+    timestamp: new Date('2025-11-20T10:30:00'),
+    metadata: {
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
+      status: 'active',
+    },
+  },
+  {
+    id: '10',
+    type: 'role_completed_view',
+    category: 'role',
+    title: 'VP of Mining Operations Completed View',
+    description: 'Vice President of Mining Operations watched "Worksite Wearables: Enhancing Worker Awareness and Compliance" to completion.',
+    timestamp: new Date('2025-11-19T16:10:00'),
+    metadata: {
+      roleTitle: 'VP of Mining Operations',
+    },
+  },
+  {
+    id: '11',
+    type: 'milestone_watch_time',
+    category: 'content',
+    title: 'Watch Time Milestone: 12 Hours',
+    description: 'Cumulative watch time for "Your 6-Month Roadmap to Zero-Incident Operations" has reached 12 hours across all viewers.',
+    timestamp: new Date('2025-11-18T09:45:00'),
+    metadata: {
+      contentTitle: 'Your 6-Month Roadmap to Zero-Incident Operations',
+      milestone: 12,
+    },
+  },
+  {
+    id: '12',
+    type: 'role_first_impression',
+    category: 'role',
+    title: 'Senior Safety Advisor: First Impression',
+    description: 'Senior Safety Advisor served their first impression from "Modernising Safety Culture in High-Risk Environments".',
+    timestamp: new Date('2025-11-17T13:15:00'),
+    metadata: {
+      roleTitle: 'Senior Safety Advisor',
+    },
+  },
+  {
+    id: '13',
+    type: 'milestone_impressions',
+    category: 'content',
+    title: 'Content Milestone: 500 Impressions',
+    description: '"How Leading Mines Use Predictive Analytics to Reduce Safety Incidents" reached 500 impressions.',
+    timestamp: new Date('2025-11-16T11:30:00'),
+    metadata: {
+      contentTitle: 'How Leading Mines Use Predictive Analytics',
+      milestone: 500,
+    },
+  },
+  {
+    id: '14',
+    type: 'role_completed_view',
+    category: 'role',
+    title: 'Mine Operations Superintendent Completed View',
+    description: 'Mine Operations Superintendent watched "Reducing Downtime Through Automated Safety Interventions" to completion.',
+    timestamp: new Date('2025-11-15T14:50:00'),
+    metadata: {
+      roleTitle: 'Mine Operations Superintendent',
+    },
+  },
+];
