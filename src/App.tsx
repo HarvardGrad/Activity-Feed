@@ -8,55 +8,47 @@ import type { ActivityEvent } from './types/activity';
 
 export default function App() {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [activeCampaignType, setActiveCampaignType] = useState('all');
 
   const filteredEvents = useMemo(() => {
-    let events = mockEvents;
+    if (activeFilter === 'all') return mockEvents;
     
-    if (activeFilter !== 'all') {
-      const categoryMap: Record<string, string> = {
-        campaign: 'campaign',
-        content: 'content',
-        role: 'role',
-      };
-      events = events.filter(event => event.category === categoryMap[activeFilter]);
-    }
+    const categoryMap: Record<string, string> = {
+      campaign: 'campaign',
+      content: 'content',
+      role: 'role',
+    };
     
-    if (activeCampaignType !== 'all') {
-      const typeMap: Record<string, string> = {
-        always_on: 'Always On',
-        tactical: 'Tactical',
-      };
-      events = events.filter(event => event.metadata?.campaignType === typeMap[activeCampaignType]);
-    }
-    
-    return events;
-  }, [activeFilter, activeCampaignType]);
+    return mockEvents.filter(event => {
+      return event.category === categoryMap[activeFilter];
+    });
+  }, [activeFilter]);
 
   return (
-    <div className="min-h-screen py-12 px-4" style={{ backgroundColor: '#F5F5F5' }}>
+    <div className="min-h-screen bg-[#FAF9F7] py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-10">
-          <div className="flex items-center gap-4 mb-6">
+        {/* Header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-4 mb-8">
             <CompanyLogo />
             <div>
-              <h1 className="mb-1" style={{ color: '#272525' }}>Target Timeline</h1>
-              <p className="text-sm" style={{ color: '#6B6661' }}>IronPeak Minerals Group</p>
+              <h1 className="text-[#2D2A27] mb-1">Target Timeline</h1>
+              <p className="text-[#6B6661]">IronPeak Minerals Group</p>
             </div>
           </div>
           
-          <div className="h-px mb-6" style={{ backgroundColor: '#EAEBEC' }}></div>
+          {/* Subtle divider */}
+          <div className="h-px bg-gradient-to-r from-[#E8E5E1] via-[#E8E5E1]/50 to-transparent mb-8"></div>
 
-          <div className="overflow-x-auto">
+          {/* Filters */}
+          <div className="flex justify-start">
             <FilterBar 
               activeFilter={activeFilter} 
-              onFilterChange={setActiveFilter}
-              activeCampaignType={activeCampaignType}
-              onCampaignTypeChange={setActiveCampaignType}
+              onFilterChange={setActiveFilter} 
             />
           </div>
         </div>
 
+        {/* Timeline */}
         <div className="relative">
           {filteredEvents.length > 0 ? (
             <div className="space-y-0">
@@ -69,34 +61,26 @@ export default function App() {
               ))}
             </div>
           ) : (
-            <div 
-              className="bg-white rounded-xl p-16 text-center"
-              style={{ border: '1px solid #EAEBEC' }}
-            >
-              <div 
-                className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
-                style={{ backgroundColor: '#F5F5F5' }}
-              >
-                <Activity className="w-10 h-10" style={{ color: '#A9A9A9' }} />
+            <div className="bg-white rounded-2xl shadow-sm border border-[#E8E5E1]/60 p-16 text-center">
+              <div className="w-20 h-20 bg-[#FAF9F7] rounded-full flex items-center justify-center mx-auto mb-6">
+                <Activity className="w-10 h-10 text-[#9B9692]" />
               </div>
-              <h3 className="mb-2" style={{ color: '#272525' }}>No events found</h3>
-              <p style={{ color: '#6B6661' }}>
+              <h3 className="text-[#2D2A27] mb-2">No events found</h3>
+              <p className="text-[#6B6661]">
                 Try adjusting your filters to see more activity.
               </p>
             </div>
           )}
         </div>
 
+        {/* Footer indicator */}
         {filteredEvents.length > 0 && (
-          <div className="text-center mt-10 pb-4">
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full"
-              style={{ border: '1px solid #EAEBEC' }}
-            >
-              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#FF7C22' }}></div>
-              <span className="text-sm" style={{ color: '#6B6661' }}>
+          <div className="text-center mt-12 pb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-[#E8E5E1] shadow-sm">
+              <div className="w-1.5 h-1.5 rounded-full bg-[#7FB685]"></div>
+              <small className="text-[#6B6661]">
                 Showing {filteredEvents.length} event{filteredEvents.length !== 1 ? 's' : ''}
-              </span>
+              </small>
             </div>
           </div>
         )}
