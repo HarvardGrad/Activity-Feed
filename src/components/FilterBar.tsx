@@ -27,9 +27,10 @@ export function FilterBar({
   onCampaignTypeChange 
 }: FilterBarProps) {
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3">
+    <div className="flex flex-col gap-4">
+      {/* Event Type Filters */}
       <div 
-        className="flex rounded-xl p-1.5 gap-1"
+        className="flex rounded-xl p-1.5 gap-1 w-fit"
         style={{ backgroundColor: '#FFFFFF', border: '1px solid #EAEBEC' }}
       >
         {eventFilters.map((filter) => (
@@ -48,24 +49,28 @@ export function FilterBar({
         ))}
       </div>
 
-      <div 
-        className="flex rounded-xl p-1.5 gap-1"
-        style={{ backgroundColor: '#FFFFFF', border: '1px solid #EAEBEC' }}
-      >
-        {campaignTypeFilters.map((filter) => (
-          <button
-            key={filter.id}
-            onClick={() => onCampaignTypeChange(filter.id)}
-            className="px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: activeCampaignType === filter.id ? '#272525' : 'transparent',
-              color: activeCampaignType === filter.id ? '#FFFFFF' : '#6B6661',
-              fontWeight: activeCampaignType === filter.id ? 500 : 400,
-            }}
-          >
-            {filter.label}
-          </button>
-        ))}
+      {/* Campaign Type Filters */}
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium whitespace-nowrap" style={{ color: '#A9A9A9' }}>
+          Campaign Type:
+        </span>
+        <div className="flex gap-2">
+          {campaignTypeFilters.map((filter) => (
+            <button
+              key={filter.id}
+              onClick={() => onCampaignTypeChange(filter.id)}
+              className="px-3 py-1.5 rounded-full whitespace-nowrap transition-all duration-200 text-sm"
+              style={{
+                backgroundColor: '#FFFFFF',
+                border: activeCampaignType === filter.id ? '1.5px solid #FF7C22' : '1px solid #EAEBEC',
+                color: activeCampaignType === filter.id ? '#FF7C22' : '#6B6661',
+                fontWeight: activeCampaignType === filter.id ? 500 : 400,
+              }}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
