@@ -6,11 +6,13 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_repeat_engagement',
     category: 'role',
     title: 'Director of HSE: Repeat Engagement',
-    description: 'Director of Health, Safety & Environment has viewed content 7+ times, showing strong interest in your safety solutions.',
-    timestamp: new Date('2025-11-26T14:30:00'), // Today
+    description: 'Director of Health, Safety & Environment has engaged with campaign content 7+ times this month, showing strong interest in your safety solutions.',
+    timestamp: new Date('2025-11-26T14:30:00'),
     metadata: {
       roleTitle: 'Director of HSE',
       engagementCount: 7,
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
     },
   },
   {
@@ -23,6 +25,8 @@ export const mockEvents: ActivityEvent[] = [
     metadata: {
       contentTitle: 'How IronPeak Can Reduce LTI Rates',
       milestone: 5000,
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
     },
   },
   {
@@ -48,6 +52,8 @@ export const mockEvents: ActivityEvent[] = [
     metadata: {
       contentTitle: 'Case Study: 37% Reduction in Incidents',
       milestone: 250,
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
     },
   },
   {
@@ -55,10 +61,12 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_completed_view',
     category: 'role',
     title: 'Chief Operating Officer Completed View',
-    description: 'Chief Operating Officer (COO) watched "Lodeguard Incident Prevention Suite: 2025 Overview" to completion for the first time.',
+    description: 'Chief Operating Officer (COO) watched a piece of content to completion for the first time.',
     timestamp: new Date('2025-11-24T13:30:00'),
     metadata: {
       roleTitle: 'Chief Operating Officer',
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
     },
   },
   {
@@ -71,6 +79,8 @@ export const mockEvents: ActivityEvent[] = [
     metadata: {
       contentTitle: 'Advanced Hazard Forecasting',
       milestone: 8,
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
     },
   },
   {
@@ -78,10 +88,12 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_first_impression',
     category: 'role',
     title: 'New Key Role: First Impression',
-    description: 'HSE Manager served their first impression from your campaign.',
+    description: 'HSE Manager was reached by campaign content for the first time this month.',
     timestamp: new Date('2025-11-22T15:45:00'),
     metadata: {
       roleTitle: 'HSE Manager',
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
     },
   },
   {
@@ -94,6 +106,8 @@ export const mockEvents: ActivityEvent[] = [
     metadata: {
       contentTitle: 'The Hidden Costs of Near-Misses',
       milestone: 1000,
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
     },
   },
   {
@@ -114,10 +128,12 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_completed_view',
     category: 'role',
     title: 'VP of Mining Operations Completed View',
-    description: 'Vice President of Mining Operations watched "Worksite Wearables: Enhancing Worker Awareness and Compliance" to completion.',
+    description: 'Vice President of Mining Operations watched a piece of content to completion for the first time.',
     timestamp: new Date('2025-11-19T16:10:00'),
     metadata: {
       roleTitle: 'VP of Mining Operations',
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
     },
   },
   {
@@ -130,6 +146,8 @@ export const mockEvents: ActivityEvent[] = [
     metadata: {
       contentTitle: 'Your 6-Month Roadmap to Zero-Incident Operations',
       milestone: 12,
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
     },
   },
   {
@@ -137,10 +155,12 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_first_impression',
     category: 'role',
     title: 'Senior Safety Advisor: First Impression',
-    description: 'Senior Safety Advisor served their first impression from "Modernising Safety Culture in High-Risk Environments".',
+    description: 'Senior Safety Advisor was reached by campaign content for the first time this month.',
     timestamp: new Date('2025-11-17T13:15:00'),
     metadata: {
       roleTitle: 'Senior Safety Advisor',
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
     },
   },
   {
@@ -153,6 +173,8 @@ export const mockEvents: ActivityEvent[] = [
     metadata: {
       contentTitle: 'How Leading Mines Use Predictive Analytics',
       milestone: 500,
+      campaignName: 'Mining Safety Innovation - Q1 2025',
+      campaignType: 'Tactical',
     },
   },
   {
@@ -160,10 +182,12 @@ export const mockEvents: ActivityEvent[] = [
     type: 'role_completed_view',
     category: 'role',
     title: 'Mine Operations Superintendent Completed View',
-    description: 'Mine Operations Superintendent watched "Reducing Downtime Through Automated Safety Interventions" to completion.',
+    description: 'Mine Operations Superintendent watched a piece of content to completion for the first time.',
     timestamp: new Date('2025-11-15T14:50:00'),
     metadata: {
       roleTitle: 'Mine Operations Superintendent',
+      campaignName: 'Mining Safety Leaders Program',
+      campaignType: 'Always On',
     },
   },
 ];

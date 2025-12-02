@@ -1,0 +1,83 @@
+Please update the existing Activity Feed code (don’t rebuild from scratch) to 1) visually align it with the other Apps that we have created, namely the Yappy Monthly Report and Yappy Client Portal 2) apply the functional/content tweaks below.
+
+⸻
+
+1) Align Activity Feed visuals with the Monthly Progress prototypes
+
+Make the Activity Feed page feel like part of the same product system as the Yappy Monthly Report and Yappy Client Portal:
+	•	Use the same Yappy brand styles:
+	•	Primary orange: #FF7C22 (for icons, accents, active filters)
+	•	Neutrals: light background #F5F5F5 or similar, card background #FFFFFF, borders in light grey #EAEBEC, text greys #272525 / #A9A9A9.
+	•	Typography:
+	•	Headings: same font family and weight as the report headings (Poppins-like, medium/bold).
+	•	Body text: same as other prototypes (Inter-like, regular).
+	•	Use consistent sizes (H1/H2/H3, body, caption) as in the Monthly Report.
+	•	Cards:
+	•	Activity cards should match the report card style: white background, subtle border, 8–12px radius, light shadow or border only.
+	•	Keep plenty of white space inside each card (top/bottom padding similar to the tactical cards).
+	•	Filter pill bar:
+	•	Match the style of section filters in the other prototypes: rounded pills, orange/white or dark/white active state, soft grey inactive state.
+	•	Timeline icons:
+	•	Use the same icon sizing and line thickness as the metrics icons used in the report pages.
+	•	Keep the vertical timeline line subtle and light grey.
+
+Don’t change the overall layout structure (target title, tabs, vertical timeline), just harmonise typography, spacing, colours, and card styling with the other prototypes.
+
+⸻
+
+2) Update the filters (labels + add Campaign Type)
+
+In the filter bar at the top of the Activity Feed:
+	•	Change the existing filter label:
+	•	“Campaign Changes” → “Program Changes”.
+	•	Add a new filter group for Campaign Type with options:
+	•	“All Types” (default)
+	•	“Always On”
+	•	“Tactical”
+
+In design mode it doesn’t need real logic, but:
+	•	Show a clear selected state for the active type (e.g. filled pill, bold text).
+	•	Place this Campaign Type filter group to the right of the main event-type filters, or clearly separated (e.g. “Filters: [All Events | Key Roles | Content Performance | Program Changes]   [All Types | Always On | Tactical]”).
+
+⸻
+
+3) Change Key Role event copy to remove specific content titles
+
+For Key Role-type events:
+	•	Remove references to specific content piece names in the event description.
+	•	Example change:
+	•	Current: “Chief Operating Officer (COO) watched “Lodeguard Incident Prevention Suite: 2025 Overview” to completion for the first time.”
+	•	New: “Chief Operating Officer (COO) watched a piece of content to completion for the first time.”
+	•	Apply similar generic phrasing for all Key Role events:
+	•	First-time completion → “watched a piece of content to completion for the first time”
+	•	Repeat engagement → “has engaged with campaign content 7+ times this month”
+	•	New role → “was reached by campaign content for the first time this month”
+
+Make sure the headline and body text for these events no longer include specific content titles, only generic wording.
+
+⸻
+
+4) Add Campaign Name and Campaign Type label to each activity card
+
+For every activity card in the timeline:
+	•	Add a campaign name reference, using a subtle meta row similar to the report prototypes.
+	•	Example placement:
+	•	Under the event title, add a light-grey caption line:
+“Campaign: Mining Safety Innovation – Q1 2025”
+	•	Add a label that shows whether the activity belongs to an Always On or Tactical campaign:
+	•	Use a small pill/badge, aligned with the campaign name (same row or just to the right).
+	•	Label text: “Always On” or “Tactical”.
+	•	Colour treatment:
+	•	Always On → soft neutral pill (e.g. light grey border, dark grey text).
+	•	Tactical → subtle orange-accent pill (using the Yappy orange for border/text but not too loud).
+
+Use consistent positioning across all cards so the eye can quickly distinguish campaign type.
+
+⸻
+
+5) Miscellaneous polish
+	•	Ensure date placement (top-right of each card) still looks consistent with the other prototypes: same date format and text style.
+	•	Maintain good vertical spacing between timeline items so the feed feels airy, not cramped.
+	•	Confirm that the new elements (campaign name + type label) still work responsively if the viewport narrows.
+
+Please update the existing HTML and CSS to implement all of the above, keeping the underlying structure but tightly aligning visual design and copy with the Yappy Monthly Report and Yappy Client Portal.

@@ -7,7 +7,8 @@ import {
   Briefcase, 
   TrendingUp,
   CheckCircle,
-  XCircle
+  XCircle,
+  Layers
 } from 'lucide-react';
 import type { ActivityEvent } from '../types/activity';
 
@@ -40,20 +41,11 @@ export function TimelineEvent({ event, isLast }: TimelineEventProps) {
     }
   };
 
-  const getIconColor = () => {
-    if (event.type.includes('removed')) return 'text-[#9B9692]';
-    if (event.category === 'campaign') return 'text-[#E69158]';
-    if (event.category === 'content') return 'text-[#6B9BD1]';
-    if (event.category === 'role') return 'text-[#7FB685]';
-    return 'text-[#E69158]';
-  };
-
-  const getBackgroundColor = () => {
-    if (event.type.includes('removed')) return 'bg-[#F5F3F0]';
-    if (event.category === 'campaign') return 'bg-[#FDF6F2]';
-    if (event.category === 'content') return 'bg-[#F3F7FB]';
-    if (event.category === 'role') return 'bg-[#F3F9F5]';
-    return 'bg-white';
+  const getIconStyles = () => {
+    if (event.type.includes('removed')) {
+      return { color: '#A9A9A9', backgroundColor: '#F5F5F5' };
+    }
+    return { color: '#FF7C22', backgroundColor: '#FFF5ED' };
   };
 
   const formatTimestamp = (date: Date) => {
@@ -64,60 +56,88 @@ export function TimelineEvent({ event, isLast }: TimelineEventProps) {
     });
   };
 
+  const getCampaignTypeBadgeStyles = (): React.CSSProperties => {
+    if (event.metadata?.campaignType === 'Always On') {
+      return { backgroundColor: '#F5F5F5', color: '#6B6661', border: '1px solid #EAEBEC' };
+    }
+    return { backgroundColor: '#FFF5ED', color: '#FF7C22', border: '1px solid #FFE4D1' };
+  };
+
   return (
-    <div className="relative flex gap-6">
-      {/* Timeline connector */}
+    <div className="relative flex gap-5">
       <div className="flex flex-col items-center flex-shrink-0">
-        <div className={`w-11 h-11 rounded-full flex items-center justify-center ${getBackgroundColor()} border border-[#F0EDE9] shadow-sm ${getIconColor()}`}>
+        <div 
+          className="w-10 h-10 rounded-full flex items-center justify-center"
+          style={{ ...getIconStyles(), border: '1px solid #EAEBEC' }}
+        >
           {getIcon()}
         </div>
         {!isLast && (
-          <div className="w-px flex-1 bg-gradient-to-b from-[#E8E5E1] via-[#E8E5E1]/50 to-transparent mt-3" style={{ minHeight: '32px' }} />
+          <div 
+            className="w-px flex-1 mt-3" 
+            style={{ minHeight: '28px', backgroundColor: '#EAEBEC' }} 
+          />
         )}
       </div>
 
-      {/* Event card */}
-      <div className="flex-1 mb-8">
-        <div className="bg-white rounded-2xl shadow-sm border border-[#E8E5E1]/60 overflow-hidden hover:shadow-md transition-shadow duration-200">
-          <div className="px-6 py-5 md:px-7 md:py-6">
-            <div className="flex items-start justify-between gap-6 mb-3">
-              <div className="flex-1">
-                <h3 className="text-[#2D2A27] mb-2">{event.title}</h3>
-                <p className="text-[#6B6661] leading-relaxed">{event.description}</p>
-              </div>
-              <small className="text-[#9B9692] whitespace-nowrap font-normal">
+      <div className="flex-1 mb-6">
+        <div 
+          className="bg-white rounded-xl overflow-hidden transition-colors duration-200"
+          style={{ border: '1px solid #EAEBEC' }}
+        >
+          <div className="px-5 py-4 md:px-6 md:py-5">
+            <div className="flex items-start justify-between gap-4 mb-2">
+              <h3 className="font-medium text-base" style={{ color: '#272525' }}>{event.title}</h3>
+              <span className="text-sm whitespace-nowrap" style={{ color: '#A9A9A9' }}>
                 {formatTimestamp(event.timestamp)}
-              </small>
+              </span>
             </div>
 
-            {/* Metadata badges */}
+            {event.metadata?.campaignName && (
+              <div className="flex flex-wrap items-center gap-2 mb-3">
+                <div className="flex items-center gap-1.5 text-sm" style={{ color: '#A9A9A9' }}>
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>Campaign: {event.metadata.campaignName}</span>
+                </div>
+                {event.metadata?.campaignType && (
+                  <span 
+                    className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium"
+                    style={getCampaignTypeBadgeStyles()}
+                  >
+                    {event.metadata.campaignType}
+                  </span>
+                )}
+              </div>
+            )}
+
+            <p className="text-sm leading-relaxed" style={{ color: '#6B6661' }}>{event.description}</p>
+
             <div className="flex flex-wrap gap-2 mt-4">
-              {event.metadata?.campaignName && (
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-normal ${
-                  event.metadata.status === 'removed' 
-                    ? 'bg-[#F5F3F0] text-[#6B6661] border border-[#E8E5E1]' 
-                    : 'bg-[#FDF6F2] text-[#E69158] border border-[#F0EDE9]'
-                }`}>
-                  <Flag className="w-3 h-3" />
-                  {event.metadata.campaignName}
-                </span>
-              )}
               {event.metadata?.roleTitle && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F9F5] text-[#7FB685] border border-[#E8F4EB] text-xs font-normal">
+                <span 
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium"
+                  style={{ backgroundColor: '#F0F9F1', color: '#5BA665', border: '1px solid #D4EDDA' }}
+                >
                   <Briefcase className="w-3 h-3" />
                   {event.metadata.roleTitle}
                 </span>
               )}
               {event.metadata?.contentTitle && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F7FB] text-[#6B9BD1] border border-[#E6EEF7] text-xs font-normal">
+                <span 
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium"
+                  style={{ backgroundColor: '#EEF4FB', color: '#5B8FC9', border: '1px solid #D4E4F4' }}
+                >
                   <PlayCircle className="w-3 h-3" />
                   {event.metadata.contentTitle}
                 </span>
               )}
               {event.metadata?.milestone && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF6F2] text-[#E69158] border border-[#F9E9DD] text-xs font-medium">
+                <span 
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium"
+                  style={{ backgroundColor: '#FFF5ED', color: '#FF7C22', border: '1px solid #FFE4D1' }}
+                >
                   <CheckCircle className="w-3 h-3" />
-                  {event.metadata.milestone.toLocaleString()} {event.type.includes('watch_time') ? 'hrs' : ''} milestone
+                  {event.metadata.milestone.toLocaleString()}{event.type.includes('watch_time') ? ' hrs' : ''} milestone
                 </span>
               )}
             </div>
