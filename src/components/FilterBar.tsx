@@ -9,7 +9,7 @@ const filters = [
   { id: 'all', label: 'All Events' },
   { id: 'role', label: 'Key Roles' },
   { id: 'content', label: 'Content Performance' },
-  { id: 'campaign', label: 'Campaign Changes' },
+  { id: 'campaign', label: 'Program Changes' },
 ];
 
 export function FilterBar({ activeFilter, onFilterChange }: FilterBarProps) {
