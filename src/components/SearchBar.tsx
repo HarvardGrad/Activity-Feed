@@ -8,7 +8,7 @@ interface SearchBarProps {
 
 export function SearchBar({ searchTerm, onSearchChange }: SearchBarProps) {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full rounded-lg overflow-hidden">
       <div className="relative flex items-center">
         <Search className="absolute left-3 w-4 h-4 text-[#6B6661]" />
         <input
@@ -16,7 +16,7 @@ export function SearchBar({ searchTerm, onSearchChange }: SearchBarProps) {
           placeholder="Search events..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-10 pr-10 py-2.5 rounded-full bg-white border border-[#E8E5E1] text-[#6B6661] placeholder-[#6B6661] focus:outline-none focus:ring-2 focus:ring-[#E69158] focus:border-transparent transition-all text-xs"
+          className="w-full pl-10 pr-10 py-2.5 bg-white border border-[#E8E5E1] text-[#6B6661] placeholder-[#6B6661] focus:outline-none focus:ring-2 focus:ring-[#E69158] focus:border-transparent transition-all text-xs"
         />
         {searchTerm && (
           <button
