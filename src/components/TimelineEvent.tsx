@@ -14,9 +14,10 @@ import type { ActivityEvent } from '../types/activity';
 interface TimelineEventProps {
   event: ActivityEvent;
   isLast?: boolean;
+  onLabelClick?: (label: string) => void;
 }
 
-export function TimelineEvent({ event, isLast }: TimelineEventProps) {
+export function TimelineEvent({ event, isLast, onLabelClick }: TimelineEventProps) {
   const getIcon = () => {
     switch (event.type) {
       case 'campaign_added_always_on':
@@ -93,26 +94,32 @@ export function TimelineEvent({ event, isLast }: TimelineEventProps) {
             {/* Metadata badges */}
             <div className="flex flex-wrap gap-2 mt-4">
               {event.metadata?.campaignName && (
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-normal ${
-                  event.metadata.status === 'removed' 
-                    ? 'bg-[#F5F3F0] text-[#6B6661] border border-[#E8E5E1]' 
-                    : 'bg-[#FDF6F2] text-[#E69158] border border-[#F0EDE9]'
-                }`}>
+                <button
+                  onClick={() => onLabelClick?.(event.metadata!.campaignName!)}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer ${
+                    event.metadata.status === 'removed' 
+                      ? 'bg-[#F5F3F0] text-[#6B6661] border border-[#E8E5E1]' 
+                      : 'bg-[#FDF6F2] text-[#E69158] border border-[#F0EDE9]'
+                  }`}>
                   <Flag className="w-3 h-3" />
                   {event.metadata.campaignName}
-                </span>
+                </button>
               )}
               {event.metadata?.roleTitle && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F9F5] text-[#7FB685] border border-[#E8F4EB] text-xs font-normal">
+                <button
+                  onClick={() => onLabelClick?.(event.metadata!.roleTitle!)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F9F5] text-[#7FB685] border border-[#E8F4EB] text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer">
                   <Briefcase className="w-3 h-3" />
                   {event.metadata.roleTitle}
-                </span>
+                </button>
               )}
               {event.metadata?.contentTitle && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F7FB] text-[#6B9BD1] border border-[#E6EEF7] text-xs font-normal">
+                <button
+                  onClick={() => onLabelClick?.(event.metadata!.contentTitle!)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F7FB] text-[#6B9BD1] border border-[#E6EEF7] text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer">
                   <PlayCircle className="w-3 h-3" />
                   {event.metadata.contentTitle}
-                </span>
+                </button>
               )}
               {event.metadata?.milestone && (
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF6F2] text-[#E69158] border border-[#F9E9DD] text-xs font-medium">

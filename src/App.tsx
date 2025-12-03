@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Activity } from 'lucide-react';
 import { FilterBar } from './components/FilterBar';
+import { SearchBar } from './components/SearchBar';
 import { TimelineEvent } from './components/TimelineEvent';
 import { CompanyLogo } from './components/CompanyLogo';
 import { mockEvents } from './data/mockEvents';
@@ -8,20 +9,39 @@ import type { ActivityEvent } from './types/activity';
 
 export default function App() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const filteredEvents = useMemo(() => {
-    if (activeFilter === 'all') return mockEvents;
-    
-    const categoryMap: Record<string, string> = {
-      campaign: 'campaign',
-      content: 'content',
-      role: 'role',
-    };
-    
-    return mockEvents.filter(event => {
-      return event.category === categoryMap[activeFilter];
-    });
-  }, [activeFilter]);
+    let filtered = mockEvents;
+
+    // Apply category filter
+    if (activeFilter !== 'all') {
+      const categoryMap: Record<string, string> = {
+        campaign: 'campaign',
+        content: 'content',
+        role: 'role',
+      };
+      filtered = filtered.filter(event => {
+        return event.category === categoryMap[activeFilter];
+      });
+    }
+
+    // Apply search filter
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(event => {
+        return (
+          event.title.toLowerCase().includes(term) ||
+          event.description.toLowerCase().includes(term) ||
+          event.metadata?.roleTitle?.toLowerCase().includes(term) ||
+          event.metadata?.campaignName?.toLowerCase().includes(term) ||
+          event.metadata?.contentTitle?.toLowerCase().includes(term)
+        );
+      });
+    }
+
+    return filtered;
+  }, [activeFilter, searchTerm]);
 
   return (
     <div className="min-h-screen bg-[#FAF9F7] py-12 px-4">
@@ -38,6 +58,14 @@ export default function App() {
           
           {/* Subtle divider */}
           <div className="h-px bg-gradient-to-r from-[#E8E5E1] via-[#E8E5E1]/50 to-transparent mb-8"></div>
+
+          {/* Search */}
+          <div className="mb-6">
+            <SearchBar 
+              searchTerm={searchTerm} 
+              onSearchChange={setSearchTerm} 
+            />
+          </div>
 
           {/* Filters */}
           <div className="flex justify-start">
@@ -57,6 +85,7 @@ export default function App() {
                   key={event.id} 
                   event={event} 
                   isLast={index === filteredEvents.length - 1}
+                  onLabelClick={setSearchTerm}
                 />
               ))}
             </div>
