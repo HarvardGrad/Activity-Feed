@@ -8,25 +8,23 @@ interface SearchBarProps {
 
 export function SearchBar({ searchTerm, onSearchChange }: SearchBarProps) {
   return (
-    <div className="relative w-full rounded-lg overflow-hidden">
-      <div className="relative flex items-center">
-        <Search className="absolute left-3 w-4 h-4 text-[#6B6661]" />
-        <input
-          type="text"
-          placeholder="Search events..."
-          value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
-          className="w-full pl-10 pr-10 py-2.5 bg-white border border-[#E8E5E1] text-[#6B6661] placeholder-[#6B6661] focus:outline-none focus:ring-2 focus:ring-[#E69158] focus:border-transparent transition-all text-xs"
-        />
-        {searchTerm && (
-          <button
-            onClick={() => onSearchChange('')}
-            className="absolute right-3 p-1 hover:bg-[#F5F3F0] rounded-full transition-colors"
-          >
-            <X className="w-4 h-4 text-[#6B6661]" />
-          </button>
-        )}
-      </div>
+    <div className="bg-white rounded-full p-1.5 shadow-sm border border-[#E8E5E1] flex items-center gap-2 w-full max-w-md">
+      <Search className="w-4 h-4 text-[#6B6661] flex-shrink-0 ml-2" />
+      <input
+        type="text"
+        placeholder="Search events..."
+        value={searchTerm}
+        onChange={(e) => onSearchChange(e.target.value)}
+        className="flex-1 bg-transparent text-[#6B6661] placeholder-italic placeholder-[#6B6661] focus:outline-none text-xs pr-2"
+      />
+      {searchTerm && (
+        <button
+          onClick={() => onSearchChange('')}
+          className="p-1 hover:bg-[#F5F3F0] rounded-full transition-colors flex-shrink-0"
+        >
+          <X className="w-4 h-4 text-[#6B6661]" />
+        </button>
+      )}
     </div>
   );
 }
