@@ -146,22 +146,14 @@ export function TimelineEvent({ event, isLast, onLabelClick }: TimelineEventProp
               <div className="flex gap-2">
                 <button
                   onClick={() => handleVote('like')}
-                  className={`p-2 rounded-full transition-all ${
-                    vote === 'like'
-                      ? 'bg-[#7FB685] text-white'
-                      : 'text-[#9B9692] hover:bg-[#F5F3F0]'
-                  }`}
+                  className="p-2 text-[#9B9692] hover:opacity-75 transition-opacity"
                   title="Like this event"
                 >
                   <ThumbsUp className="w-4 h-4" fill={vote === 'like' ? 'currentColor' : 'none'} />
                 </button>
                 <button
                   onClick={() => handleVote('dislike')}
-                  className={`p-2 rounded-full transition-all ${
-                    vote === 'dislike'
-                      ? 'bg-[#E69158] text-white'
-                      : 'text-[#9B9692] hover:bg-[#F5F3F0]'
-                  }`}
+                  className="p-2 text-[#9B9692] hover:opacity-75 transition-opacity"
                   title="Dislike this event"
                 >
                   <ThumbsDown className="w-4 h-4" fill={vote === 'dislike' ? 'currentColor' : 'none'} />
