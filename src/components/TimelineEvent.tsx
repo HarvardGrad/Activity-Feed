@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Flag, 
   Eye, 
@@ -7,7 +7,9 @@ import {
   Briefcase, 
   TrendingUp,
   CheckCircle,
-  XCircle
+  XCircle,
+  ThumbsUp,
+  ThumbsDown
 } from 'lucide-react';
 import type { ActivityEvent } from '../types/activity';
 
@@ -18,6 +20,16 @@ interface TimelineEventProps {
 }
 
 export function TimelineEvent({ event, isLast, onLabelClick }: TimelineEventProps) {
+  const [vote, setVote] = useState<'like' | 'dislike' | null>(null);
+
+  const handleVote = (voteType: 'like' | 'dislike') => {
+    if (vote === voteType) {
+      setVote(null);
+    } else {
+      setVote(voteType);
+    }
+  };
+
   const getIcon = () => {
     switch (event.type) {
       case 'campaign_added_always_on':
@@ -91,42 +103,70 @@ export function TimelineEvent({ event, isLast, onLabelClick }: TimelineEventProp
               </small>
             </div>
 
-            {/* Metadata badges */}
-            <div className="flex flex-wrap gap-2 mt-4">
-              {event.metadata?.campaignName && (
+            {/* Metadata badges and voting */}
+            <div className="flex flex-wrap gap-2 mt-4 justify-between items-end">
+              <div className="flex flex-wrap gap-2">
+                {event.metadata?.campaignName && (
+                  <button
+                    onClick={() => onLabelClick?.(event.metadata!.campaignName!)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer ${
+                      event.metadata.status === 'removed' 
+                        ? 'bg-[#F5F3F0] text-[#6B6661] border border-[#E8E5E1]' 
+                        : 'bg-[#FDF6F2] text-[#E69158] border border-[#F0EDE9]'
+                    }`}>
+                    <Flag className="w-3 h-3" />
+                    {event.metadata.campaignName}
+                  </button>
+                )}
+                {event.metadata?.roleTitle && (
+                  <button
+                    onClick={() => onLabelClick?.(event.metadata!.roleTitle!)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F9F5] text-[#7FB685] border border-[#E8F4EB] text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer">
+                    <Briefcase className="w-3 h-3" />
+                    {event.metadata.roleTitle}
+                  </button>
+                )}
+                {event.metadata?.contentTitle && (
+                  <button
+                    onClick={() => onLabelClick?.(event.metadata!.contentTitle!)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F7FB] text-[#6B9BD1] border border-[#E6EEF7] text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer">
+                    <PlayCircle className="w-3 h-3" />
+                    {event.metadata.contentTitle}
+                  </button>
+                )}
+                {event.metadata?.milestone && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF6F2] text-[#E69158] border border-[#F9E9DD] text-xs font-medium">
+                    <CheckCircle className="w-3 h-3" />
+                    {event.metadata.milestone.toLocaleString()} {event.type.includes('watch_time') ? 'hrs' : ''} milestone
+                  </span>
+                )}
+              </div>
+              
+              {/* Vote buttons */}
+              <div className="flex gap-2">
                 <button
-                  onClick={() => onLabelClick?.(event.metadata!.campaignName!)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer ${
-                    event.metadata.status === 'removed' 
-                      ? 'bg-[#F5F3F0] text-[#6B6661] border border-[#E8E5E1]' 
-                      : 'bg-[#FDF6F2] text-[#E69158] border border-[#F0EDE9]'
-                  }`}>
-                  <Flag className="w-3 h-3" />
-                  {event.metadata.campaignName}
+                  onClick={() => handleVote('like')}
+                  className={`p-2 rounded-full transition-all ${
+                    vote === 'like'
+                      ? 'bg-[#7FB685] text-white'
+                      : 'text-[#9B9692] hover:bg-[#F5F3F0]'
+                  }`}
+                  title="Like this event"
+                >
+                  <ThumbsUp className="w-4 h-4" fill={vote === 'like' ? 'currentColor' : 'none'} />
                 </button>
-              )}
-              {event.metadata?.roleTitle && (
                 <button
-                  onClick={() => onLabelClick?.(event.metadata!.roleTitle!)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F9F5] text-[#7FB685] border border-[#E8F4EB] text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer">
-                  <Briefcase className="w-3 h-3" />
-                  {event.metadata.roleTitle}
+                  onClick={() => handleVote('dislike')}
+                  className={`p-2 rounded-full transition-all ${
+                    vote === 'dislike'
+                      ? 'bg-[#E69158] text-white'
+                      : 'text-[#9B9692] hover:bg-[#F5F3F0]'
+                  }`}
+                  title="Dislike this event"
+                >
+                  <ThumbsDown className="w-4 h-4" fill={vote === 'dislike' ? 'currentColor' : 'none'} />
                 </button>
-              )}
-              {event.metadata?.contentTitle && (
-                <button
-                  onClick={() => onLabelClick?.(event.metadata!.contentTitle!)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#F3F7FB] text-[#6B9BD1] border border-[#E6EEF7] text-xs font-normal transition-opacity hover:opacity-75 cursor-pointer">
-                  <PlayCircle className="w-3 h-3" />
-                  {event.metadata.contentTitle}
-                </button>
-              )}
-              {event.metadata?.milestone && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FDF6F2] text-[#E69158] border border-[#F9E9DD] text-xs font-medium">
-                  <CheckCircle className="w-3 h-3" />
-                  {event.metadata.milestone.toLocaleString()} {event.type.includes('watch_time') ? 'hrs' : ''} milestone
-                </span>
-              )}
+              </div>
             </div>
           </div>
         </div>
