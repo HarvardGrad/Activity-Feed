@@ -163,7 +163,7 @@ export const mockEvents: ActivityEvent[] = [
     description: 'Mine Operations Superintendent watched a piece of content to completion.',
     timestamp: new Date('2025-11-15T14:50:00'),
     metadata: {
-      roleTitle: 'Mine Operations Superintendent',
+      roleTitle: 'Mine Operations Superintendent (HELLO)',
     },
   },
 ];
